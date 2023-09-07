@@ -71,7 +71,7 @@ mot de passe : employee
 ### Clone the projet:
 
 ```
-git clone https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-Back.git
+git clone https://github.com/JordanB-Dev/JordanB-Dev.git
 ```
 
 ### Go to the project directory :
