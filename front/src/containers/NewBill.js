@@ -28,7 +28,6 @@ export default class NewBill {
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
     const submitButton = document.getElementById("btn-send-bill");
-
     formData.append("file", file);
     formData.append("email", email);
 
@@ -39,24 +38,26 @@ export default class NewBill {
     ) {
       submitButton.disabled = true;
       alert("Le format de fichier doit être .jpg, .jpeg ou .png");
+      this.document.querySelector(`input[data-testid="file"]`).value = "";
+      return;
     } else {
       submitButton.disabled = false;
-
-      this.store
-        .bills()
-        .create({
-          data: formData,
-          headers: {
-            noContentType: true,
-          },
-        })
-        .then(({ fileUrl, key }) => {
-          this.billId = key;
-          this.fileUrl = fileUrl;
-          this.fileName = fileName;
-        })
-        .catch((error) => console.error(error));
     }
+
+    this.store
+      .bills()
+      .create({
+        data: formData,
+        headers: {
+          noContentType: true,
+        },
+      })
+      .then(({ fileUrl, key }) => {
+        this.billId = key;
+        this.fileUrl = fileUrl;
+        this.fileName = fileName;
+      })
+      .catch((error) => console.error(error));
   };
 
   handleSubmit = (e) => {
