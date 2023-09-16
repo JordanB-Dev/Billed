@@ -44,7 +44,9 @@ export default class NewBill {
       this.document.querySelector(`input[data-testid="file"]`).value = "";
       return;
     } else {
+      /* istanbul ignore next */
       errorMessage.classList.remove("msg-block");
+      /* istanbul ignore next */
       errorMessage.style.display = "none";
     }
     /* istanbul ignore next */

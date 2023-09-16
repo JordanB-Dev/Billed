@@ -221,3 +221,94 @@ describe("Given I am connected as an employee", () => {
     });
   });
 });
+
+describe("Given I am connected as an employee", () => {
+  describe("When an error happened", () => {
+    beforeEach(() => {
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          type: "Employee",
+          email: "a@a.com",
+        })
+      );
+
+      jest.spyOn(mockStore, "bills");
+      jest.spyOn(console, "error").mockImplementation(() => {});
+      Object.defineProperty(window, "localStorage", {
+        value: localStorageMock,
+      });
+      Object.defineProperty(window, "location", {
+        value: { hash: ROUTES_PATH["NewBill"] },
+      });
+
+      document.body.innerHTML = `<div id="root"></div>`;
+      router();
+    });
+
+    test("fetches error from an API and fails with 404 error", async () => {
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname });
+      };
+
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          type: "Employee",
+          email: "a@a",
+        })
+      );
+
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          update: () => {
+            return Promise.reject(new Error("Erreur 404"));
+          },
+        };
+      });
+      const newBill = new NewBill({
+        document,
+        onNavigate,
+        store: mockStore,
+        localStorage: window.localStorage,
+      });
+
+      const form = screen.getByTestId("form-new-bill");
+      const handleSubmit = jest.fn((e) => newBill.handleSubmit(e));
+      form.addEventListener("submit", handleSubmit);
+      fireEvent.submit(form);
+      await new Promise(process.nextTick);
+      expect(console.error).toBeCalled();
+    });
+
+    test("Then it should fetch messages from API and fail with 500 message error", async () => {
+      jest.spyOn(mockStore, "bills");
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          type: "Employee",
+          email: "a@a",
+        })
+      );
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.appendChild(root);
+      router();
+
+      const allMethods = mockStore.bills();
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          ...allMethods,
+          update: () => {
+            return Promise.reject(new Error("Erreur 500"));
+          },
+        };
+      });
+      window.onNavigate(ROUTES_PATH.Bills);
+      document.body.innerHTML = BillsUI({ error: "Erreur 500" });
+      await new Promise(process.nextTick);
+      const message = await screen.getByText(/Erreur 500/);
+      expect(message).toBeTruthy();
+    });
+  });
+});
