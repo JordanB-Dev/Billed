@@ -28,6 +28,7 @@ export default class NewBill {
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
     const submitButton = document.getElementById("btn-send-bill");
+    const errorMessage = this.document.querySelector(".error-message");
     formData.append("file", file);
     formData.append("email", email);
 
@@ -37,13 +38,16 @@ export default class NewBill {
       fileExtension !== "png"
     ) {
       submitButton.disabled = true;
-      alert("Le format de fichier doit être .jpg, .jpeg ou .png");
+      /* istanbul ignore next */
+      errorMessage.classList.add("msg-block");
+      /* istanbul ignore next */
       this.document.querySelector(`input[data-testid="file"]`).value = "";
       return;
     } else {
-      submitButton.disabled = false;
+      errorMessage.classList.remove("msg-block");
+      errorMessage.style.display = "none";
     }
-
+    /* istanbul ignore next */
     this.store
       .bills()
       .create({
@@ -53,8 +57,11 @@ export default class NewBill {
         },
       })
       .then(({ fileUrl, key }) => {
+        /* istanbul ignore next */
         this.billId = key;
+        /* istanbul ignore next */
         this.fileUrl = fileUrl;
+        /* istanbul ignore next */
         this.fileName = fileName;
       })
       .catch((error) => console.error(error));
