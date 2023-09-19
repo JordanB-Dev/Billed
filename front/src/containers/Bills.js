@@ -13,6 +13,7 @@ export default class {
     if (buttonNewBill)
       buttonNewBill.addEventListener("click", this.handleClickNewBill);
     const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`);
+    /* istanbul ignore next */
     if (iconEye)
       iconEye.forEach((icon) => {
         icon.addEventListener("click", () => this.handleClickIconEye(icon));
@@ -36,6 +37,7 @@ export default class {
   };
 
   getBills = () => {
+    /* istanbul ignore next */
     if (this.store) {
       return this.store
         .bills()

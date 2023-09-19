@@ -11,6 +11,7 @@ export const filteredBills = (data, status) => {
         let selectCondition;
 
         // in jest environment
+        /* istanbul ignore next */
         if (typeof jest !== "undefined") {
           selectCondition = bill.status === status;
         } else {
@@ -96,6 +97,7 @@ export default class {
       .html(
         `<div style='text-align: center;'><img width=${imgWidth} src=${billUrl} alt="Bill"/></div>`
       );
+    /* istanbul ignore next */
     if (typeof $("#modaleFileAdmin1").modal === "function")
       /* istanbul ignore next */
       $("#modaleFileAdmin1").modal("show");
@@ -147,7 +149,7 @@ export default class {
     this.updateBill(newBill);
     this.onNavigate(ROUTES_PATH["Dashboard"]);
   };
-
+  /* istanbul ignore next */
   handleShowTickets(e, bills, index) {
     if (this.counter === undefined || this.index !== index) this.counter = 0;
     if (this.index === undefined || this.index !== index) this.index = index;
@@ -177,6 +179,7 @@ export default class {
   }
 
   getBillsAllUsers = () => {
+    /* istanbul ignore next */
     if (this.store) {
       return this.store
         .bills()

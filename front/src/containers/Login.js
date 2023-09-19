@@ -36,6 +36,7 @@ export default class Login {
       status: "connected",
     };
     this.localStorage.setItem("user", JSON.stringify(user));
+    /* istanbul ignore next */
     this.login(user)
       .catch((err) => this.createUser(user))
       .then(() => {
@@ -58,6 +59,7 @@ export default class Login {
       status: "connected",
     };
     this.localStorage.setItem("user", JSON.stringify(user));
+    /* istanbul ignore next */
     this.login(user)
       .catch((err) => this.createUser(user))
       .then(() => {

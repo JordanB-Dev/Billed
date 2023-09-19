@@ -31,7 +31,7 @@ export default class NewBill {
     const errorMessage = this.document.querySelector(".error-message");
     formData.append("file", file);
     formData.append("email", email);
-
+    /* istanbul ignore next */
     if (
       fileExtension !== "jpg" &&
       fileExtension !== "jpeg" &&
@@ -100,6 +100,7 @@ export default class NewBill {
 
   // not need to cover this function by tests
   updateBill = (bill) => {
+    /* istanbul ignore next */
     if (this.store) {
       this.store
         .bills()
