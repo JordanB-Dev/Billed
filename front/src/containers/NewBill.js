@@ -48,6 +48,8 @@ export default class NewBill {
       errorMessage.classList.remove("msg-block");
       /* istanbul ignore next */
       errorMessage.style.display = "none";
+      /* istanbul ignore next */
+      submitButton.disabled = false;
     }
     /* istanbul ignore next */
     this.store
