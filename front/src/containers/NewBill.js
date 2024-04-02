@@ -38,9 +38,9 @@ export default class NewBill {
       fileExtension !== "png"
     ) {
       submitButton.disabled = true;
-      /* istanbul ignore next */
+
       errorMessage.classList.add("msg-block");
-      /* istanbul ignore next */
+
       this.document.querySelector(`input[data-testid="file"]`).value = "";
     } else {
       /* istanbul ignore next */
@@ -60,11 +60,8 @@ export default class NewBill {
         },
       })
       .then(({ fileUrl, key }) => {
-        /* istanbul ignore next */
         this.billId = key;
-        /* istanbul ignore next */
         this.fileUrl = fileUrl;
-        /* istanbul ignore next */
         this.fileName = fileName;
       })
       .catch((error) => console.error(error));
