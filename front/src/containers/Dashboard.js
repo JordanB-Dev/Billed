@@ -42,8 +42,8 @@ export const card = (bill) => {
 
   return `
     <div class='bill-card' id='open-bill${bill.id}' data-testid='open-bill${
-    bill.id
-  }'>
+      bill.id
+    }'>
       <div class='bill-card-name-container'>
         <div class='bill-card-name'> ${firstName} ${lastName} </div>
         <span class='bill-card-grey'> ... </span>
@@ -99,7 +99,6 @@ export default class {
       );
     /* istanbul ignore next */
     if (typeof $("#modaleFileAdmin1").modal === "function")
-      /* istanbul ignore next */
       $("#modaleFileAdmin1").modal("show");
   };
 
@@ -160,11 +159,8 @@ export default class {
       );
       this.counter++;
     } else {
-      /* istanbul ignore next */
       $(`#arrow-icon${this.index}`).css({ transform: "rotate(90deg)" });
-      /* istanbul ignore next */
       $(`#status-bills-container${this.index}`).html("");
-      /* istanbul ignore next */
       this.counter++;
     }
 
