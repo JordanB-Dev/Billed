@@ -86,6 +86,7 @@ describe("Given I am connected as an employee", () => {
       expect(screen.getByTestId("form-new-bill")).toBeTruthy();
     });
   });
+
   describe("When I click on icon eye", () => {
     test("Then it should open the bill modal", () => {
       Object.defineProperty(window, "localStorage", {

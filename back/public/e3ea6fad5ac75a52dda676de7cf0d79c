@@ -1,0 +1,23 @@
+function runClock() {
+  today = new Date('2024-02-25 17:28:00')
+  hours = today.getHours()
+  minutes = today.getMinutes()
+  seconds = today.getSeconds()
+  timeValue = hours + ':' + minutes
+
+  today2 = new Date()
+  hours2 = today2.getHours()
+  minutes2 = today2.getMinutes()
+  seconds2 = today2.getSeconds()
+  timeValue2 = minutes - minutes2
+  console.log(seconds2)
+  console.log(timeValue2 * 60)
+
+  if (today <= today2) {
+    console.log('succes')
+  } else {
+    console.log('no')
+  }
+}
+
+runClock()
